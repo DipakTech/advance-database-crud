@@ -2,13 +2,16 @@ import mongoose, { Schema } from "mongoose";
 
 const topicSchema = new Schema(
   {
-    title: String,
-    description: String,
+    name:String,
+    age:String,
+    department:String,
+    mobile:String,
+    salary:String,
   },
   {
     timestamps: true,
-  }
-);
+  },
+)
 
 const Topic = mongoose.models.Topic || mongoose.model("Topic", topicSchema);
 

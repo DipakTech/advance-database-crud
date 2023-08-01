@@ -3,9 +3,9 @@ import Topic from "@/models/topic";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { title, description } = await request.json();
+  const { name, age, department, mobile, salary } = await request.body
   await connectMongoDB();
-  await Topic.create({ title, description });
+  await Topic.create({ name, age, department, mobile, salary })
   return NextResponse.json({ message: "Topic Created" }, { status: 201 });
 }
 
