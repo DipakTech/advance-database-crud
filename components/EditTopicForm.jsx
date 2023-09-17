@@ -1,21 +1,10 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { set } from 'mongoose'
 
-export default function EditTopicForm({
-  id,
-  name: initialName,
-  age: initialAge,
-  department: initialDepartment,
-  mobile: initialMobile,
-  salary: initialSalary,
-}) {
-  const [name, setName] = useState(initialName)
-  const [age, setAge] = useState(initialAge)
-  const [department, setDepartment] = useState(initialDepartment)
-  const [mobile, setMobile] = useState(initialMobile)
-  const [salary, setSalary] = useState(initialSalary)
-
+export default function EditTopicForm({ editData, setEditData }) {
+  const { _id: id, name, age, department, mobile, salary } = editData
   const router = useRouter()
 
   const handleSubmit = async (e) => {
@@ -44,39 +33,41 @@ export default function EditTopicForm({
   return (
     <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
       <input
-        onChange={(e) => setName(e.target.value)}
-        value={name}
+        onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+        value={editData.name}
         className='border border-slate-500 px-8 py-2'
         type='text'
         placeholder='Enter name'
       />
 
       <input
-        onChange={(e) => setAge(e.target.value)}
-        value={age}
+        onChange={(e) => setEditData({ ...editData, age: e.target.value })}
+        value={editData.age}
         className='border border-slate-500 px-8 py-2'
         type='text'
         placeholder='Enter age'
       />
 
       <input
-        onChange={(e) => setDepartment(e.target.value)}
-        value={department}
+        onChange={(e) =>
+          setEditData({ ...editData, department: e.target.value })
+        }
+        value={editData.department}
         className='border border-slate-500 px-8 py-2'
         type='text'
         placeholder='Enter department'
       />
 
       <input
-        onChange={(e) => setMobile(e.target.value)}
-        value={mobile}
+        onChange={(e) => setEditData({ ...editData, mobile: e.target.value })}
+        value={editData.mobile}
         className='border border-slate-500 px-8 py-2'
         type='text'
         placeholder='Enter mobile number'
       />
       <input
-        onChange={(e) => setSalary(e.target.value)}
-        value={salary}
+        onChange={(e) => setEditData({ ...editData, salary: e.target.value })}
+        value={editData.salary}
         className='border border-slate-500 px-8 py-2'
         type='text'
         placeholder='Enter salary'

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 export default function AddTopic() {
   const [name, setName] = useState('')
@@ -13,7 +14,7 @@ export default function AddTopic() {
   const router = useRouter()
 
   const handleSubmit = async (e) => {
-    e.preventDefault(name, age, department, mobile, salary)
+    e.preventDefault()
 
     if (!name || !age || !department || !mobile || !salary) {
       alert('Title and description are required.')
@@ -21,21 +22,24 @@ export default function AddTopic() {
     }
 
     try {
-      const res = await fetch('http://localhost:3000/api/topics', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ name, age, department, mobile, salary }),
+      const { data } = await axios.post('/api/topics', {
+        name,
+        age,
+        department,
+        mobile,
+        salary,
       })
+      router.push('/')
 
-      if (res.ok) {
+      console.log(data)
+
+      if (response.status === 200) {
         router.push('/')
       } else {
         throw new Error('Failed to create a topic')
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
